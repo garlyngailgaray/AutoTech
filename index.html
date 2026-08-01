@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="logo">Auto<span>Tech</span></div>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('services')">Services</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('about')">About</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('contact')">Contact Us</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('login')" class="nav-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HOMEPAGE -->
+    <section id="home" class="page active">
+        <div class="hero-content">
+            <h1>Welcome to AutoTech</h1>
+            <p>Your one-stop solution for all vehicle and motor repair needs. Fast, reliable, and professional service by our expert staff.</p>
+            <button class="btn btn-primary" onclick="showPage('signup')">Create an Account</button>
+        </div>
+    </section>
+
+    <!-- SERVICES PAGE -->
+    <section id="services" class="page">
+        <div class="content-page">
+            <h2>Services Offered</h2>
+            <p>We provide comprehensive repair and maintenance for all types of vehicles and motorcycles.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Engine Diagnostics</h3>
+                    <p>Advanced computer diagnostics to find exactly what's wrong with your engine.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Motorcycle Repair</h3>
+                    <p>Specialized care for all motorcycle brands, from oil changes to full engine rebuilds.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brake &amp; Suspension</h3>
+                    <p>Ensure your safety on the road with our premium brake and suspension services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Routine Maintenance</h3>
+                    <p>Oil changes, tire rotations, and fluid checks to keep your vehicle running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section id="about" class="page">
+        <div class="content-page">
+            <h2>About AutoTech</h2>
+            <p>Founded in 2015, AutoTech has grown from a small local garage to the city's most trusted auto and motor repair shop. Our team consists of certified admins, dedicated cashiers, skilled staff, and we treat every client like family.</p>
+            <br>
+            <p>We believe in transparency, quality parts, and honest labor. Whether you drive a compact car or ride a heavy-duty motorcycle, we have the tools and expertise to get you back on the road safely.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact" class="page">
+        <div class="content-page">
+            <h2>Contact Us</h2>
+            <p><strong>Address:</strong> 123 Mechanic Avenue, Motor City, MC 45678</p>
+            <p><strong>Phone:</strong> (555) 123-4567</p>
+            <p><strong>Email:</strong> support@autotech.com</p>
+            <p><strong>Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</p>
+        </div>
+    </section>
+
+    <!-- SIGNUP PAGE -->
+    <section id="signup" class="page">
+        <div class="form-container">
+            <h2>Create Account</h2>
+            <div id="signupSuccess" class="success-msg">Account Created Successfully! Redirecting to Login...</div>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="role">Select Role</label>
+                    <select id="role" required>
+                        <option value="">-- Choose Role --</option>
+                        <option value="client">Client</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="staff">Staff</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="s_name">Full Name</label>
+                    <input type="text" id="s_name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_address">Address</label>
+                    <input type="text" id="s_address" placeholder="123 Main St, City" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_problem">Problem of Vehicle/Motor</label>
+                    <textarea id="s_problem" rows="3" placeholder="Describe the issue with your vehicle or motor..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="s_username">Username</label>
+                    <input type="text" id="s_username" placeholder="johndoe99" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_password">Password</label>
+                    <input type="password" id="s_password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div class="form-footer">
+                Already have an account? <a href="javascript:void(0)" onclick="showPage('login')">Login here</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section id="login" class="page">
+        <div class="form-container">
+            <h2>Login to AutoTech</h2>
+            <div id="loginError" class="success-msg error-msg">Invalid username or password.</div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="l_username">Username</label>
+                    <input type="text" id="l_username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="l_password">Password</label>
+                    <input type="password" id="l_password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="form-footer">
+                Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')">Sign up here</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD (Shown after successful login) -->
+    <section id="dashboard" class="page">
+        <h1>Welcome to your Dashboard!</h1>
+        <p id="welcomeMsg" class="welcome-msg"></p>
+        <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
+    </section>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
