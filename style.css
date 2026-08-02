@@ -167,6 +167,21 @@ nav ul {
     100% { background: rgba(131, 190, 242, 0.15); color: #83bef2; box-shadow: none; }
 }
 
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #666; /* Adjust to match your theme's text color */
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+    color: #007bff; /* Adjust to your primary brand color (e.g., AutoTech blue) */
+    transform: translateX(-4px); /* Smooth slide to the left on hover */
+}
+
 /* --- PAGE SECTIONS --- */
 .page {
     display: none;
