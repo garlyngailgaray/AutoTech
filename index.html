@@ -179,44 +179,75 @@
         </form>
         
         <div class="form-footer">
-            Already have an account? <a href="javascript:void(0)" onclick="showPage('login')">Login here</a>
-        </div>
+    Already have an account? <a href="javascript:void(0)" onclick="showPage('role-selection')">Login here</a>
+</div>
     </div>
 </section>
 
-
-
-   <!-- LOGIN PAGE -->
-<section id="login" class="page">
-    <div class="form-container">
-        <!-- Back to Homepage Button -->
-        <a href="javascript:void(0)" onclick="showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
-        
-        <h2>Login to AutoCare</h2>
-        <div id="loginError" class="success-msg error-msg">Invalid username or password.</div>
-        
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label for="l_username">Username</label>
-                <input type="text" id="l_username" placeholder="Enter username" required>
-            </div>
-            <div class="form-group">
-                <label for="l_password">Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="l_password" placeholder="Enter password" required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility('l_password', this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </span>
+    <!-- ROLE SELECTION PAGE (NEW) -->
+    <section id="role-selection" class="page">
+        <div class="role-selection-container">
+            <a href="javascript:void(0)" onclick="showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
+            <h2>Select Your Role</h2>
+            <p class="role-subtitle">Please choose your account type to continue</p>
+            
+            <div class="roles-grid">
+                <div class="role-box" onclick="selectRole('client')">
+                    <div class="role-icon">👤</div>
+                    <h3>Client</h3>
+                    <p>Vehicle Owners</p>
+                </div>
+                <div class="role-box" onclick="selectRole('staff')">
+                    <div class="role-icon">🔧</div>
+                    <h3>Staff</h3>
+                    <p>Mechanics & Techs</p>
+                </div>
+                <div class="role-box" onclick="selectRole('admin')">
+                    <div class="role-icon">⚙️</div>
+                    <h3>Admin</h3>
+                    <p>System Managers</p>
+                </div>
+                <div class="role-box" onclick="selectRole('cashier')">
+                    <div class="role-icon">💳</div>
+                    <h3>Cashier</h3>
+                    <p>Billing & Payments</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        
-        <div class="form-footer">
-            Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')">Sign up here</a>
         </div>
-    </div>
-</section>
+    </section>
+
+
+       <!-- LOGIN PAGE (UPDATED) -->
+    <section id="login" class="page">
+        <div class="form-container">
+            <!-- Back to Role Selection Button -->
+            <a href="javascript:void(0)" onclick="backToRoleSelection()" class="back-link">← Change Role</a>
+            
+            <h2 id="loginHeading">Login to AutoCare</h2>
+            <div id="loginError" class="success-msg error-msg">Invalid username or password.</div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="l_username">Username</label>
+                    <input type="text" id="l_username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="l_password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="l_password" placeholder="Enter password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('l_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            
+            <div class="form-footer">
+                Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')">Sign up here</a>
+            </div>
+        </div>
+    </section>
 
     <!-- USER DASHBOARD -->
     <section id="user-dashboard" class="page">
