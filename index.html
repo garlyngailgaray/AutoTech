@@ -8,10 +8,9 @@
 </head>
 <body>
 
-        <!-- HEADER & NAVIGATION -->
+      <!-- HEADER & NAVIGATION -->
     <header>
         <div class="logo">
-            <!-- NEW: Logo Image -->
             <img src="AutoCareLogo.png" alt="AutoCare Logo" class="header-logo">
             <span>Auto<span>Care</span></span>
         </div>
@@ -22,10 +21,62 @@
                 <li><a href="javascript:void(0)" class="nav-link" data-target="about-section" onclick="navigateToSection('about-section')">About</a></li>
                 <li><a href="javascript:void(0)" class="nav-link" data-target="contact-section" onclick="navigateToSection('contact-section')">Contact Us</a></li>
                 <li><a href="javascript:void(0)" class="nav-link nav-login" onclick="goToLogin()">Login</a></li>
+                <li>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                        <span id="theme-icon"></span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
 
+        <!-- ADMIN SETUP (Only shows when no admin exists) -->
+    <section id="admin-setup" class="page">
+        <div class="form-container">
+            <h2>Initial Admin Setup</h2>
+            <p class="setup-intro">Create the first administrator account to manage the system.</p>
+            <div id="setupSuccess" class="success-msg">Admin Account Created Successfully! Redirecting to Login...</div>
+            <form id="setupForm" onsubmit="handleFirstAdminSetup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="setup_firstname">First Name</label>
+                        <input type="text" id="setup_firstname" placeholder="Admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="setup_lastname">Last Name</label>
+                        <input type="text" id="setup_lastname" placeholder="User" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="setup_email">Email Address <span class="optional-text">(Optional)</span></label>
+                    <input type="email" id="setup_email" placeholder="admin@autocare.com">
+                </div>
+                <div class="form-group">
+                    <label for="setup_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                    <input type="tel" id="setup_phone" placeholder="0912 345 6789">
+                </div>
+                <div class="form-group">
+                    <label for="setup_address">Address</label>
+                    <input type="text" id="setup_address" placeholder="Admin Office" required>
+                </div>
+                <div class="form-group">
+                    <label for="setup_username">Username</label>
+                    <input type="text" id="setup_username" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label for="setup_password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="setup_password" placeholder="••••••••" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('setup_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Admin Account</button>
+            </form>
+        </div>
+    </section>
+    
     <!-- MAIN SCROLLABLE PAGE -->
     <main id="main-page" class="page active">
 
@@ -114,31 +165,41 @@
 
     </main>
 
-           <!-- SIGNUP PAGE -->
+          <!-- SIGNUP PAGE -->
 <section id="signup" class="page">
     <div class="form-container">
-        <!-- Back to Homepage Button -->
         <a href="javascript:void(0)" onclick="showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
         
         <h2>Create Account</h2>
         <div id="signupSuccess" class="success-msg">Account Created Successfully! Redirecting to Dashboard...</div>
         
         <form id="signupForm" onsubmit="handleSignup(event)">
-            <div class="form-group">
-                <label for="s_name">Full Name</label>
-                <input type="text" id="s_name" placeholder="John Doe" required>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="s_firstname">First Name</label>
+                    <input type="text" id="s_firstname" placeholder="John" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_lastname">Last Name</label>
+                    <input type="text" id="s_lastname" placeholder="Doe" required>
+                </div>
             </div>
+            
+            <div class="form-group">
+                <label for="s_email">Email Address <span class="optional-text">(Optional)</span></label>
+                <input type="email" id="s_email" placeholder="johndoe@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="s_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                <input type="tel" id="s_phone" placeholder="0912 345 6789">
+            </div>
+
             <div class="form-group">
                 <label for="s_address">Address</label>
                 <input type="text" id="s_address" placeholder="123 Main St, City" required>
             </div>
             
-            <!-- NEW: Phone Number Field -->
-            <div class="form-group">
-                <label for="s_phone">Phone Number</label>
-                <input type="tel" id="s_phone" placeholder="e.g., 0912 345 6789" required>
-            </div>
-
             <div class="form-group">
                 <label>Sex</label>
                 <div class="radio-group">
@@ -151,10 +212,9 @@
                 </div>
             </div>
             
-            <!-- Vehicle Type Field -->
             <div class="form-group">
                 <label for="s_vehicle_type">Type of Vehicle/Motor</label>
-                <input type="text" id="s_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX, Toyota Vios" required>
+                <input type="text" id="s_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
             </div>
 
             <div class="form-group">
@@ -166,6 +226,7 @@
                 <label for="s_username">Username</label>
                 <input type="text" id="s_username" placeholder="johndoe99" required>
             </div>
+            
             <div class="form-group">
                 <label for="s_password">Password</label>
                 <div class="password-wrapper">
@@ -175,12 +236,13 @@
                     </span>
                 </div>
             </div>
+            
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         
         <div class="form-footer">
-    Already have an account? <a href="javascript:void(0)" onclick="showPage('role-selection')">Login here</a>
-</div>
+            Already have an account? <a href="javascript:void(0)" onclick="showPage('login')">Login here</a>
+        </div>
     </div>
 </section>
 
@@ -243,8 +305,10 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             
-            <div class="form-footer">
+          <div class="form-footer">
                 Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')">Sign up here</a>
+                <br><br>
+                <a href="javascript:void(0)" onclick="checkAndShowAdminSetup()" class="admin-setup-link">First time setup? Create Admin Account</a>
             </div>
         </div>
     </section>
@@ -267,6 +331,448 @@
             </div>
 
             <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+    </section> 
+    
+    <!-- ADMIN DASHBOARD -->
+    <section id="admin-dashboard" class="page">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <p id="adminWelcome" class="welcome-text"></p>
+                <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚗</div>
+                    <div class="stat-info">
+                        <h3 id="totalClients">0</h3>
+                        <p>Clients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍💼</div>
+                    <div class="stat-info">
+                        <h3 id="totalStaff">0</h3>
+                        <p>Staff</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h3 id="totalCashiers">0</h3>
+                        <p>Cashiers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('create-staff')">Create Staff</button>
+                <button class="tab-btn" onclick="showTab('create-cashier')">Create Cashier</button>
+                <button class="tab-btn" onclick="showTab('create-client')">Create Client</button>
+                <button class="tab-btn" onclick="showTab('view-users')">View All Users</button>
+                <button class="tab-btn" onclick="showTab('pending-approvals')">Pending Approvals</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="create-staff" class="tab-content active">
+                <div class="form-container">
+                    <h2>Create Staff Account</h2>
+                    <div id="staffSuccess" class="success-msg">Staff Account Created Successfully!</div>
+                    <form id="staffForm" onsubmit="handleStaffSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="staff_firstname">First Name</label>
+                                <input type="text" id="staff_firstname" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staff_lastname">Last Name</label>
+                                <input type="text" id="staff_lastname" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="staff_email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="staff_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_address">Address</label>
+                            <input type="text" id="staff_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_username">Username</label>
+                            <input type="text" id="staff_username" placeholder="johndoe99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="staff_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('staff_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Staff Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="create-cashier" class="tab-content">
+                <div class="form-container">
+                    <h2>Create Cashier Account</h2>
+                    <div id="cashierSuccess" class="success-msg">Cashier Account Created Successfully!</div>
+                    <form id="cashierForm" onsubmit="handleCashierSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cashier_firstname">First Name</label>
+                                <input type="text" id="cashier_firstname" placeholder="Jane" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cashier_lastname">Last Name</label>
+                                <input type="text" id="cashier_lastname" placeholder="Smith" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="cashier_email" placeholder="jane@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="cashier_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_address">Address</label>
+                            <input type="text" id="cashier_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_username">Username</label>
+                            <input type="text" id="cashier_username" placeholder="janesmith99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="cashier_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('cashier_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Cashier Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="create-client" class="tab-content">
+                <div class="form-container">
+                    <h2>Create Client Account</h2>
+                    <div id="clientSuccess" class="success-msg">Client Account Created Successfully!</div>
+                    <form id="clientForm" onsubmit="handleClientSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="client_firstname">First Name</label>
+                                <input type="text" id="client_firstname" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="client_lastname">Last Name</label>
+                                <input type="text" id="client_lastname" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="client_email" placeholder="johndoe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="client_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="client_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="client_address">Address</label>
+                            <input type="text" id="client_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="client_sex" value="Male" required> Male
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="client_sex" value="Female" required> Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_vehicle_type">Type of Vehicle/Motor</label>
+                            <input type="text" id="client_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_problem">Problem of Vehicle/Motor</label>
+                            <textarea id="client_problem" rows="3" placeholder="Describe the issue..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_username">Username</label>
+                            <input type="text" id="client_username" placeholder="johndoe99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="client_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('client_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Client Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="view-users" class="tab-content">
+                <div class="users-list-container">
+                    <h2>All Registered Users</h2>
+                    <div id="usersList" class="users-table"></div>
+                </div>
+            </div>
+
+            <div id="pending-approvals" class="tab-content">
+                <div class="users-list-container">
+                    <h2>Pending Vehicle Problem Approvals</h2>
+                    <div id="pendingList" class="users-table"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ADMIN DASHBOARD -->
+    <section id="admin-dashboard" class="page">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <p id="adminWelcome" class="welcome-text"></p>
+                <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚗</div>
+                    <div class="stat-info">
+                        <h3 id="totalClients">0</h3>
+                        <p>Clients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍💼</div>
+                    <div class="stat-info">
+                        <h3 id="totalStaff">0</h3>
+                        <p>Staff</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h3 id="totalCashiers">0</h3>
+                        <p>Cashiers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('create-staff')">Create Staff</button>
+                <button class="tab-btn" onclick="showTab('create-cashier')">Create Cashier</button>
+                <button class="tab-btn" onclick="showTab('create-client')">Create Client</button>
+                <button class="tab-btn" onclick="showTab('view-users')">View All Users</button>
+                <button class="tab-btn" onclick="showTab('pending-approvals')">Pending Approvals</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="create-staff" class="tab-content active">
+                <div class="form-container">
+                    <h2>Create Staff Account</h2>
+                    <div id="staffSuccess" class="success-msg">Staff Account Created Successfully!</div>
+                    <form id="staffForm" onsubmit="handleStaffSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="staff_firstname">First Name</label>
+                                <input type="text" id="staff_firstname" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="staff_lastname">Last Name</label>
+                                <input type="text" id="staff_lastname" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="staff_email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="staff_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_address">Address</label>
+                            <input type="text" id="staff_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_username">Username</label>
+                            <input type="text" id="staff_username" placeholder="johndoe99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="staff_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('staff_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Staff Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="create-cashier" class="tab-content">
+                <div class="form-container">
+                    <h2>Create Cashier Account</h2>
+                    <div id="cashierSuccess" class="success-msg">Cashier Account Created Successfully!</div>
+                    <form id="cashierForm" onsubmit="handleCashierSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cashier_firstname">First Name</label>
+                                <input type="text" id="cashier_firstname" placeholder="Jane" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cashier_lastname">Last Name</label>
+                                <input type="text" id="cashier_lastname" placeholder="Smith" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="cashier_email" placeholder="jane@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="cashier_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_address">Address</label>
+                            <input type="text" id="cashier_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_username">Username</label>
+                            <input type="text" id="cashier_username" placeholder="janesmith99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cashier_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="cashier_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('cashier_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Cashier Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="create-client" class="tab-content">
+                <div class="form-container">
+                    <h2>Create Client Account</h2>
+                    <div id="clientSuccess" class="success-msg">Client Account Created Successfully!</div>
+                    <form id="clientForm" onsubmit="handleClientSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="client_firstname">First Name</label>
+                                <input type="text" id="client_firstname" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="client_lastname">Last Name</label>
+                                <input type="text" id="client_lastname" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_email">Email Address <span class="optional-text">(Optional)</span></label>
+                            <input type="email" id="client_email" placeholder="johndoe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="client_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                            <input type="tel" id="client_phone" placeholder="0912 345 6789">
+                        </div>
+                        <div class="form-group">
+                            <label for="client_address">Address</label>
+                            <input type="text" id="client_address" placeholder="123 Main St, City" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="client_sex" value="Male" required> Male
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="client_sex" value="Female" required> Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_vehicle_type">Type of Vehicle/Motor</label>
+                            <input type="text" id="client_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_problem">Problem of Vehicle/Motor</label>
+                            <textarea id="client_problem" rows="3" placeholder="Describe the issue..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_username">Username</label>
+                            <input type="text" id="client_username" placeholder="johndoe99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client_password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="client_password" placeholder="••••••••" required>
+                                <span class="toggle-password" onclick="togglePasswordVisibility('client_password', this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Client Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="view-users" class="tab-content">
+                <div class="users-list-container">
+                    <h2>All Registered Users</h2>
+                    <div id="usersList" class="users-table"></div>
+                </div>
+            </div>
+
+            <div id="pending-approvals" class="tab-content">
+                <div class="users-list-container">
+                    <h2>Pending Vehicle Problem Approvals</h2>
+                    <div id="pendingList" class="users-table"></div>
+                </div>
+            </div>
         </div>
     </section>
 
