@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoTech</title>
+    <title>AutoCare</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-      <!-- HEADER & NAVIGATION -->
+    <!-- HEADER & NAVIGATION -->
     <header>
         <div class="logo">
             <img src="AutoCareLogo.png" alt="AutoCare Logo" class="header-logo">
@@ -16,11 +16,11 @@
         </div>
         <nav>
             <ul>
-                <li><a href="javascript:void(0)" class="nav-link active" data-target="home-section" onclick="navigateToSection('home-section')">Home</a></li>
-                <li><a href="javascript:void(0)" class="nav-link" data-target="services-section" onclick="navigateToSection('services-section')">Services</a></li>
-                <li><a href="javascript:void(0)" class="nav-link" data-target="about-section" onclick="navigateToSection('about-section')">About</a></li>
-                <li><a href="javascript:void(0)" class="nav-link" data-target="contact-section" onclick="navigateToSection('contact-section')">Contact Us</a></li>
-                <li><a href="javascript:void(0)" class="nav-link nav-login" onclick="goToLogin()">Login</a></li>
+                <li><a href="#" class="nav-link active" data-target="home-section" onclick="event.preventDefault(); navigateToSection('home-section')">Home</a></li>
+                <li><a href="#" class="nav-link" data-target="services-section" onclick="event.preventDefault(); navigateToSection('services-section')">Services</a></li>
+                <li><a href="#" class="nav-link" data-target="about-section" onclick="event.preventDefault(); navigateToSection('about-section')">About</a></li>
+                <li><a href="#" class="nav-link" data-target="contact-section" onclick="event.preventDefault(); navigateToSection('contact-section')">Contact Us</a></li>
+                <li><a href="#" class="nav-link nav-login" onclick="event.preventDefault(); goToLogin()">Login</a></li>
                 <li>
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
                         <span id="theme-icon"></span>
@@ -30,12 +30,209 @@
         </nav>
     </header>
 
-        <!-- ADMIN SETUP (Only shows when no admin exists) -->
+    <!-- MAIN SCROLLABLE PAGE -->
+    <main id="main-page" class="page active">
+        <section id="home-section" class="scroll-section hero-section">
+            <div class="hero-content">
+                <h1>Welcome to AutoCare</h1>
+                <p>Your one-stop solution for all vehicle and motor repair needs. Fast, reliable, and professional service by our expert staff.</p>
+                <button class="btn btn-primary" onclick="showPage('signup')">Create an Account</button>
+            </div>
+        </section>
+
+        <section id="services-section" class="scroll-section">
+            <div class="content-page">
+                <h2>Services Offered</h2>
+                <p>We provide comprehensive repair and maintenance for all types of vehicles and motorcycles.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=250&fit=crop" alt="Engine Diagnostics" class="service-image">
+                        <div class="service-content">
+                            <h3>Engine Diagnostics</h3>
+                            <p class="service-description">Advanced computer diagnostics to find exactly what's wrong with your engine.</p>
+                            <div class="service-price">
+                                <span class="price-label">Estimated Price:</span>
+                                <span class="price-value">1,500 - ₱3,500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" alt="Motorcycle Repair" class="service-image">
+                        <div class="service-content">
+                            <h3>Motorcycle Repair</h3>
+                            <p class="service-description">Specialized care for all motorcycle brands, from oil changes to full engine rebuilds.</p>
+                            <div class="service-price">
+                                <span class="price-label">Estimated Price:</span>
+                                <span class="price-value">₱800 - ₱5,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&h=250&fit=crop" alt="Brake & Suspension" class="service-image">
+                        <div class="service-content">
+                            <h3>Brake & Suspension</h3>
+                            <p class="service-description">Ensure your safety on the road with our premium brake and suspension services.</p>
+                            <div class="service-price">
+                                <span class="price-label">Estimated Price:</span>
+                                <span class="price-value">₱2,500 - ₱8,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c6da77?w=400&h=250&fit=crop" alt="Routine Maintenance" class="service-image">
+                        <div class="service-content">
+                            <h3>Routine Maintenance</h3>
+                            <p class="service-description">Oil changes, tire rotations, and fluid checks to keep your vehicle running smoothly.</p>
+                            <div class="service-price">
+                                <span class="price-label">Estimated Price:</span>
+                                <span class="price-value">₱1,200 - 3,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-section" class="scroll-section">
+            <div class="content-page">
+                <h2>About AutoCare</h2>
+                <p>Founded in 2015, AutoCare has grown from a small local garage to the city's most trusted auto and motor repair shop. Our team consists of certified admins, dedicated cashiers, skilled staff, and we treat every client like family.</p>
+                <p>We believe in transparency, quality parts, and honest labor. Whether you drive a compact car or ride a heavy-duty motorcycle, we have the tools and expertise to get you back on the road safely.</p>
+            </div>
+        </section>
+
+        <section id="contact-section" class="scroll-section">
+            <div class="content-page">
+                <h2>Contact Us</h2>
+                <p><strong>Address:</strong> 123 Mechanic Avenue, Motor City, MC 45678</p>
+                <p><strong>Phone:</strong> (555) 123-4567</p>
+                <p><strong>Email:</strong> support@autocare.com</p>
+                <p><strong>Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ROLE SELECTION PAGE -->
+    <section id="role-selection" class="page">
+        <div class="role-selection-container">
+            <h2>Select Your Role</h2>
+            <p class="role-subtitle">Please choose your role to continue</p>
+            <div class="roles-grid">
+                <div class="role-box" onclick="selectRole('client')">
+                    <div class="role-icon">🚗</div>
+                    <h3>Client</h3>
+                    <p>Book repairs & track status</p>
+                </div>
+                <div class="role-box" onclick="selectRole('staff')">
+                    <div class="role-icon">🔧</div>
+                    <h3>Staff</h3>
+                    <p>Manage repair requests</p>
+                </div>
+                <div class="role-box" onclick="selectRole('cashier')">
+                    <div class="role-icon">💰</div>
+                    <h3>Cashier</h3>
+                    <p>Handle payments</p>
+                </div>
+                <div class="role-box" onclick="selectRole('admin')">
+                    <div class="role-icon">🛡️</div>
+                    <h3>Admin</h3>
+                    <p>System management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section id="login" class="page">
+        <div class="form-container">
+            <a href="#" onclick="event.preventDefault(); backToRoleSelection()" class="back-link">← Change Role</a>
+            <h2 id="loginHeading">Login to AutoCare</h2>
+            <div id="loginError" class="success-msg error-msg">Invalid username or password.</div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="l_username">Username</label>
+                    <input type="text" id="l_username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="l_password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="l_password" placeholder="Enter password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('l_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="form-footer">
+                Don't have an account? <a href="#" onclick="event.preventDefault(); showPage('signup')">Sign up here</a>
+                <br><br>
+                <a href="#" onclick="event.preventDefault(); checkAndShowAdminSetup()" class="admin-setup-link">First time setup? Create Admin Account</a>
+                <br><br>
+                <a href="#" onclick="event.preventDefault(); showPage('forgot-password')" class="back-link">Forgot Password?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIGNUP PAGE -->
+    <section id="signup" class="page">
+        <div class="form-container">
+            <a href="#" onclick="event.preventDefault(); showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
+            <h2>Create Account</h2>
+            <div id="signupSuccess" class="success-msg">Account Created Successfully! Redirecting to Dashboard...</div>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="s_firstname">First Name</label>
+                        <input type="text" id="s_firstname" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="s_lastname">Last Name</label>
+                        <input type="text" id="s_lastname" placeholder="Doe" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="s_email">Email Address <span class="optional-text">(Optional)</span></label>
+                    <input type="email" id="s_email" placeholder="johndoe@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="s_phone">Phone Number <span class="optional-text">(Optional)</span></label>
+                    <input type="tel" id="s_phone" placeholder="0912 345 6789">
+                </div>
+                <div class="form-group">
+                    <label for="s_address">Address</label>
+                    <input type="text" id="s_address" placeholder="123 Main St, City" required>
+                </div>
+                <div class="form-group">
+                    <span class="form-label">Sex</span>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="s_sex" value="Male" required> Male</label>
+                        <label class="radio-label"><input type="radio" name="s_sex" value="Female" required> Female</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="s_vehicle_type">Type of Vehicle/Motor</label>
+                    <input type="text" id="s_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
+                </div>
+                <div class="form-group">
+                    <label for="s_problem">Problem of Vehicle/Motor</label>
+                    <textarea id="s_problem" rows="3" placeholder="Describe the issue..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+            </form>
+            <div class="form-footer">
+                Already have an account? <a href="#" onclick="event.preventDefault(); showPage('login')">Login here</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN SETUP PAGE -->
     <section id="admin-setup" class="page">
         <div class="form-container">
+            <a href="#" onclick="event.preventDefault(); showPage('login')" class="back-link">← Back to Login</a>
             <h2>Initial Admin Setup</h2>
             <p class="setup-intro">Create the first administrator account to manage the system.</p>
-            <div id="setupSuccess" class="success-msg">Admin Account Created Successfully! Redirecting to Login...</div>
+            <div id="setupSuccess" class="success-msg">Admin Account Created Successfully!</div>
             <form id="setupForm" onsubmit="handleFirstAdminSetup(event)">
                 <div class="form-row">
                     <div class="form-group">
@@ -76,240 +273,35 @@
             </form>
         </div>
     </section>
-    
-    <!-- MAIN SCROLLABLE PAGE -->
-    <main id="main-page" class="page active">
 
-        <!-- HERO / HOME SECTION -->
-        <section id="home-section" class="scroll-section hero-section">
-            <div class="hero-content">
-                <h1>Welcome to AutoCare</h1>
-                <p>Your trusted partner for complete auto care and maintenance. Quick, dependable, and top-quality repairs driven by our certified technicians.</p>
-                <button class="btn btn-primary" onclick="showPage('signup')">Create an Account</button>
-            </div>
-        </section>
-        <!-- SERVICES SECTION -->
-        <section id="services-section" class="scroll-section">
-            <div class="content-page">
-                <h2>Services Offered</h2>
-                <p>We provide comprehensive repair and maintenance for all types of vehicles and motorcycles.</p>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=250&fit=crop" alt="Engine Diagnostics" class="service-image">
-                        <div class="service-content">
-                            <h3>Engine Diagnostics</h3>
-                            <p class="service-description">Advanced computer diagnostics to find exactly what's wrong with your engine. We use state-of-the-art equipment to identify issues quickly and accurately.</p>
-                            <div class="service-price">
-                                <span class="price-label">Estimated Price:</span>
-                                <span class="price-value">₱1,500 - ₱3,500</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" alt="Motorcycle Repair" class="service-image">
-                        <div class="service-content">
-                            <h3>Motorcycle Repair</h3>
-                            <p class="service-description">Specialized care for all motorcycle brands, from oil changes to full engine rebuilds. Our expert technicians handle everything from routine maintenance to complex repairs.</p>
-                            <div class="service-price">
-                                <span class="price-label">Estimated Price:</span>
-                                <span class="price-value">₱800 - ₱5,000</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&h=250&fit=crop" alt="Brake & Suspension" class="service-image">
-                        <div class="service-content">
-                            <h3>Brake & Suspension</h3>
-                            <p class="service-description">Ensure your safety on the road with our premium brake and suspension services. We inspect, repair, and replace components to keep you safe.</p>
-                            <div class="service-price">
-                                <span class="price-label">Estimated Price:</span>
-                                <span class="price-value">₱2,500 - ₱8,000</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c6da77?w=400&h=250&fit=crop" alt="Routine Maintenance" class="service-image">
-                        <div class="service-content">
-                            <h3>Routine Maintenance</h3>
-                            <p class="service-description">Oil changes, tire rotations, and fluid checks to keep your vehicle running smoothly. Regular maintenance extends your vehicle's life and prevents costly repairs.</p>
-                            <div class="service-price">
-                                <span class="price-label">Estimated Price:</span>
-                                <span class="price-value">₱1,200 - ₱3,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ABOUT SECTION -->
-        <section id="about-section" class="scroll-section">
-            <div class="content-page">
-                <h2>About AutoCare</h2>
-                <p>Founded in 2005, AutoCare has grown from a small local garage to the city's most trusted auto and motor repair shop. Our team consists of certified admins, dedicated cashiers, skilled staff, and we treat every client like family.</p>
-                <br>
-                <p>We believe in transparency, quality parts, and honest labor. Whether you drive a compact car or ride a heavy-duty motorcycle, we have the tools and expertise to get you back on the road safely.</p>
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section id="contact-section" class="scroll-section">
-            <div class="content-page">
-                <h2>Contact Us</h2>
-                <p><strong>Address:</strong> Purok Sta. Cruz, Villalimpia, Loay, Bohol</p>
-                <p><strong>Phone:</strong> 09093671998</p>
-                <p><strong>Email:</strong> garcelgaray@gmail.com</p>
-                <p><strong>Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</p>
-            </div>
-        </section>
-
-    </main>
-
-          <!-- SIGNUP PAGE -->
-<section id="signup" class="page">
-    <div class="form-container">
-        <a href="javascript:void(0)" onclick="showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
-        
-        <h2>Create Account</h2>
-        <div id="signupSuccess" class="success-msg">Account Created Successfully! Redirecting to Dashboard...</div>
-        
-        <form id="signupForm" onsubmit="handleSignup(event)">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="s_firstname">First Name</label>
-                    <input type="text" id="s_firstname" placeholder="John" required>
-                </div>
-                <div class="form-group">
-                    <label for="s_lastname">Last Name</label>
-                    <input type="text" id="s_lastname" placeholder="Doe" required>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="s_email">Email Address <span class="optional-text">(Optional)</span></label>
-                <input type="email" id="s_email" placeholder="johndoe@example.com">
-            </div>
-            
-            <div class="form-group">
-                <label for="s_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                <input type="tel" id="s_phone" placeholder="0912 345 6789">
-            </div>
-
-            <div class="form-group">
-                <label for="s_address">Address</label>
-                <input type="text" id="s_address" placeholder="123 Main St, City" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Sex</label>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="s_sex" value="Male" required> Male
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="s_sex" value="Female" required> Female
-                    </label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="s_vehicle_type">Type of Vehicle/Motor</label>
-                <input type="text" id="s_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
-            </div>
-
-            <div class="form-group">
-                <label for="s_problem">Problem of Vehicle/Motor</label>
-                <textarea id="s_problem" rows="3" placeholder="Describe the issue with your vehicle or motor..." required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="s_username">Username</label>
-                <input type="text" id="s_username" placeholder="johndoe99" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="s_password">Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="s_password" placeholder="••••••••" required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility('s_password', this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </span>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        
-        <div class="form-footer">
-            Already have an account? <a href="javascript:void(0)" onclick="showPage('login')">Login here</a>
-        </div>
-    </div>
-</section>
-
-    <!-- ROLE SELECTION PAGE (NEW) -->
-    <section id="role-selection" class="page">
-        <div class="role-selection-container">
-            <a href="javascript:void(0)" onclick="showPage('main-page'); navigateToSection('home-section')" class="back-link">← Back to Homepage</a>
-            <h2>Select Your Role</h2>
-            <p class="role-subtitle">Please choose your account type to continue</p>
-            
-            <div class="roles-grid">
-                <div class="role-box" onclick="selectRole('client')">
-                    <div class="role-icon">👤</div>
-                    <h3>Client</h3>
-                    <p>Vehicle Owners</p>
-                </div>
-                <div class="role-box" onclick="selectRole('staff')">
-                    <div class="role-icon">🔧</div>
-                    <h3>Staff</h3>
-                    <p>Mechanics & Techs</p>
-                </div>
-                <div class="role-box" onclick="selectRole('admin')">
-                    <div class="role-icon">⚙️</div>
-                    <h3>Admin</h3>
-                    <p>System Managers</p>
-                </div>
-                <div class="role-box" onclick="selectRole('cashier')">
-                    <div class="role-icon">💳</div>
-                    <h3>Cashier</h3>
-                    <p>Billing & Payments</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-       <!-- LOGIN PAGE (UPDATED) -->
-    <section id="login" class="page">
+    <!-- FORGOT PASSWORD PAGE -->
+    <section id="forgot-password" class="page">
         <div class="form-container">
-            <!-- Back to Role Selection Button -->
-            <a href="javascript:void(0)" onclick="backToRoleSelection()" class="back-link">← Change Role</a>
-            
-            <h2 id="loginHeading">Login to AutoCare</h2>
-            <div id="loginError" class="success-msg error-msg">Invalid username or password.</div>
-            
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <a href="#" onclick="event.preventDefault(); showPage('login')" class="back-link">← Back to Login</a>
+            <h2>Forgot Password</h2>
+            <p class="setup-intro">Enter your ID number and email/phone to reset your password</p>
+            <div id="forgotSuccess" class="success-msg">Password Reset Successfully!</div>
+            <div id="forgotError" class="success-msg error-msg">ID not found or credentials don't match.</div>
+            <form id="forgotForm" onsubmit="handleForgotPassword(event)">
                 <div class="form-group">
-                    <label for="l_username">Username</label>
-                    <input type="text" id="l_username" placeholder="Enter username" required>
+                    <label for="forgot_id">ID Number</label>
+                    <input type="text" id="forgot_id" placeholder="e.g., CLT-001" required>
                 </div>
                 <div class="form-group">
-                    <label for="l_password">Password</label>
+                    <label for="forgot_email">Email or Phone</label>
+                    <input type="text" id="forgot_email" placeholder="Enter your email or phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="forgot_new_password">New Password</label>
                     <div class="password-wrapper">
-                        <input type="password" id="l_password" placeholder="Enter password" required>
-                        <span class="toggle-password" onclick="togglePasswordVisibility('l_password', this)">
+                        <input type="password" id="forgot_new_password" placeholder="Enter new password" required minlength="6">
+                        <span class="toggle-password" onclick="togglePasswordVisibility('forgot_new_password', this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         </span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
             </form>
-            
-          <div class="form-footer">
-                Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')">Sign up here</a>
-                <br><br>
-                <a href="javascript:void(0)" onclick="checkAndShowAdminSetup()" class="admin-setup-link">First time setup? Create Admin Account</a>
-            </div>
         </div>
     </section>
 
@@ -318,64 +310,56 @@
         <div class="content-page dashboard-container">
             <h2>User Dashboard</h2>
             <p id="userWelcome" class="welcome-text"></p>
-
             <div class="status-card">
                 <h3>Your Vehicle Problem Report</h3>
                 <p><strong>Issue Description:</strong></p>
                 <p id="reportedProblem" class="problem-text"></p>
-
                 <div class="status-indicator">
                     <strong>Current Status:</strong>
                     <span id="approvalStatus" class="status-badge status-pending">Pending Approval</span>
                 </div>
             </div>
-
             <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
         </div>
-    </section> 
-    
+    </section>
+
+    <!-- STAFF DASHBOARD -->
+    <section id="staff-dashboard" class="page">
+        <div class="admin-container">
+            <div class="admin-header">
+                <div>
+                    <h2>Staff Dashboard</h2>
+                    <p id="staffWelcome" class="welcome-text"></p>
+                </div>
+                <div class="staff-header-actions">
+                    <span id="staffAvailabilityBadge" class="status-badge">Available</span>
+                    <button id="staffChangePasswordBtn" class="btn btn-primary" onclick="showChangePasswordModal()">Change Password</button>
+                    <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+            <div class="users-list-container">
+                <h2>Client Repair Requests</h2>
+                <div id="staffClientList" class="users-table"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- ADMIN DASHBOARD -->
     <section id="admin-dashboard" class="page">
         <div class="admin-container">
             <div class="admin-header">
-                <h2>Admin Dashboard</h2>
-                <p id="adminWelcome" class="welcome-text"></p>
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p id="adminWelcome" class="welcome-text"></p>
+                </div>
                 <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
             </div>
-
-            <!-- Stats Cards -->
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-info">
-                        <h3 id="totalUsers">0</h3>
-                        <p>Total Users</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🚗</div>
-                    <div class="stat-info">
-                        <h3 id="totalClients">0</h3>
-                        <p>Clients</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">👨‍💼</div>
-                    <div class="stat-info">
-                        <h3 id="totalStaff">0</h3>
-                        <p>Staff</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">💰</div>
-                    <div class="stat-info">
-                        <h3 id="totalCashiers">0</h3>
-                        <p>Cashiers</p>
-                    </div>
-                </div>
+                <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-info"><h3 id="totalUsers">0</h3><p>Total Users</p></div></div>
+                <div class="stat-card"><div class="stat-icon">🚗</div><div class="stat-info"><h3 id="totalClients">0</h3><p>Clients</p></div></div>
+                <div class="stat-card"><div class="stat-icon">👨‍💼</div><div class="stat-info"><h3 id="totalStaff">0</h3><p>Staff</p></div></div>
+                <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-info"><h3 id="totalCashiers">0</h3><p>Cashiers</p></div></div>
             </div>
-
-            <!-- Tabs -->
             <div class="admin-tabs">
                 <button class="tab-btn active" onclick="showTab('create-staff')">Create Staff</button>
                 <button class="tab-btn" onclick="showTab('create-cashier')">Create Cashier</button>
@@ -383,169 +367,72 @@
                 <button class="tab-btn" onclick="showTab('view-users')">View All Users</button>
                 <button class="tab-btn" onclick="showTab('pending-approvals')">Pending Approvals</button>
             </div>
-
-            <!-- Tab Contents -->
             <div id="create-staff" class="tab-content active">
                 <div class="form-container">
                     <h2>Create Staff Account</h2>
                     <div id="staffSuccess" class="success-msg">Staff Account Created Successfully!</div>
+                    <div id="staffCredentials" class="credentials-display"></div>
                     <form id="staffForm" onsubmit="handleStaffSignup(event)">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="staff_firstname">First Name</label>
-                                <input type="text" id="staff_firstname" placeholder="John" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="staff_lastname">Last Name</label>
-                                <input type="text" id="staff_lastname" placeholder="Doe" required>
-                            </div>
+                            <div class="form-group"><label for="staff_firstname">First Name</label><input type="text" id="staff_firstname" placeholder="John" required></div>
+                            <div class="form-group"><label for="staff_lastname">Last Name</label><input type="text" id="staff_lastname" placeholder="Doe" required></div>
                         </div>
-                        <div class="form-group">
-                            <label for="staff_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="staff_email" placeholder="john@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="staff_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_address">Address</label>
-                            <input type="text" id="staff_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_username">Username</label>
-                            <input type="text" id="staff_username" placeholder="johndoe99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="staff_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('staff_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
+                        <div class="form-group"><label for="staff_email">Email Address <span class="optional-text">(Optional)</span></label><input type="email" id="staff_email" placeholder="john@example.com"></div>
+                        <div class="form-group"><label for="staff_phone">Phone Number <span class="optional-text">(Optional)</span></label><input type="tel" id="staff_phone" placeholder="0912 345 6789"></div>
+                        <div class="form-group"><label for="staff_address">Address</label><input type="text" id="staff_address" placeholder="123 Main St, City" required></div>
                         <button type="submit" class="btn btn-primary">Create Staff Account</button>
                     </form>
                 </div>
             </div>
-
             <div id="create-cashier" class="tab-content">
                 <div class="form-container">
                     <h2>Create Cashier Account</h2>
                     <div id="cashierSuccess" class="success-msg">Cashier Account Created Successfully!</div>
+                    <div id="cashierCredentials" class="credentials-display"></div>
                     <form id="cashierForm" onsubmit="handleCashierSignup(event)">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="cashier_firstname">First Name</label>
-                                <input type="text" id="cashier_firstname" placeholder="Jane" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="cashier_lastname">Last Name</label>
-                                <input type="text" id="cashier_lastname" placeholder="Smith" required>
-                            </div>
+                            <div class="form-group"><label for="cashier_firstname">First Name</label><input type="text" id="cashier_firstname" placeholder="Jane" required></div>
+                            <div class="form-group"><label for="cashier_lastname">Last Name</label><input type="text" id="cashier_lastname" placeholder="Smith" required></div>
                         </div>
-                        <div class="form-group">
-                            <label for="cashier_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="cashier_email" placeholder="jane@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="cashier_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_address">Address</label>
-                            <input type="text" id="cashier_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_username">Username</label>
-                            <input type="text" id="cashier_username" placeholder="janesmith99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="cashier_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('cashier_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
+                        <div class="form-group"><label for="cashier_email">Email Address <span class="optional-text">(Optional)</span></label><input type="email" id="cashier_email" placeholder="jane@example.com"></div>
+                        <div class="form-group"><label for="cashier_phone">Phone Number <span class="optional-text">(Optional)</span></label><input type="tel" id="cashier_phone" placeholder="0912 345 6789"></div>
+                        <div class="form-group"><label for="cashier_address">Address</label><input type="text" id="cashier_address" placeholder="123 Main St, City" required></div>
                         <button type="submit" class="btn btn-primary">Create Cashier Account</button>
                     </form>
                 </div>
             </div>
-
             <div id="create-client" class="tab-content">
                 <div class="form-container">
                     <h2>Create Client Account</h2>
                     <div id="clientSuccess" class="success-msg">Client Account Created Successfully!</div>
+                    <div id="clientCredentials" class="credentials-display"></div>
                     <form id="clientForm" onsubmit="handleClientSignup(event)">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="client_firstname">First Name</label>
-                                <input type="text" id="client_firstname" placeholder="John" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="client_lastname">Last Name</label>
-                                <input type="text" id="client_lastname" placeholder="Doe" required>
-                            </div>
+                            <div class="form-group"><label for="client_firstname">First Name</label><input type="text" id="client_firstname" placeholder="John" required></div>
+                            <div class="form-group"><label for="client_lastname">Last Name</label><input type="text" id="client_lastname" placeholder="Doe" required></div>
                         </div>
+                        <div class="form-group"><label for="client_email">Email Address <span class="optional-text">(Optional)</span></label><input type="email" id="client_email" placeholder="johndoe@example.com"></div>
+                        <div class="form-group"><label for="client_phone">Phone Number <span class="optional-text">(Optional)</span></label><input type="tel" id="client_phone" placeholder="0912 345 6789"></div>
+                        <div class="form-group"><label for="client_address">Address</label><input type="text" id="client_address" placeholder="123 Main St, City" required></div>
                         <div class="form-group">
-                            <label for="client_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="client_email" placeholder="johndoe@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="client_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="client_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="client_address">Address</label>
-                            <input type="text" id="client_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Sex</label>
+                            <span class="form-label">Sex</span>
                             <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="client_sex" value="Male" required> Male
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="client_sex" value="Female" required> Female
-                                </label>
+                                <label class="radio-label"><input type="radio" name="client_sex" value="Male" required> Male</label>
+                                <label class="radio-label"><input type="radio" name="client_sex" value="Female" required> Female</label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="client_vehicle_type">Type of Vehicle/Motor</label>
-                            <input type="text" id="client_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_problem">Problem of Vehicle/Motor</label>
-                            <textarea id="client_problem" rows="3" placeholder="Describe the issue..." required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_username">Username</label>
-                            <input type="text" id="client_username" placeholder="johndoe99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="client_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('client_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
+                        <div class="form-group"><label for="client_vehicle_type">Type of Vehicle/Motor</label><input type="text" id="client_vehicle_type" placeholder="e.g., Honda Civic" required></div>
+                        <div class="form-group"><label for="client_problem">Problem of Vehicle/Motor</label><textarea id="client_problem" rows="3" placeholder="Describe the issue..." required></textarea></div>
                         <button type="submit" class="btn btn-primary">Create Client Account</button>
                     </form>
                 </div>
             </div>
-
             <div id="view-users" class="tab-content">
                 <div class="users-list-container">
                     <h2>All Registered Users</h2>
                     <div id="usersList" class="users-table"></div>
                 </div>
             </div>
-
             <div id="pending-approvals" class="tab-content">
                 <div class="users-list-container">
                     <h2>Pending Vehicle Problem Approvals</h2>
@@ -554,227 +441,45 @@
             </div>
         </div>
     </section>
-    
-    <!-- ADMIN DASHBOARD -->
-    <section id="admin-dashboard" class="page">
-        <div class="admin-container">
-            <div class="admin-header">
-                <h2>Admin Dashboard</h2>
-                <p id="adminWelcome" class="welcome-text"></p>
-                <button class="btn btn-primary btn-logout" onclick="handleLogout()">Logout</button>
-            </div>
 
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-info">
-                        <h3 id="totalUsers">0</h3>
-                        <p>Total Users</p>
+    <!-- CHANGE PASSWORD MODAL -->
+    <div id="changePasswordModal" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div class="modal-content">
+            <a href="#" onclick="event.preventDefault(); backToLoginFromModal()" class="modal-back-link">← Back to Login</a>
+            <h2>Change Your Password</h2>
+            <p class="change-password-prompt">For security, please change your temporary password</p>
+            <form id="changePasswordForm" onsubmit="handleChangePassword(event)">
+                <div class="form-group">
+                    <label for="current_password">Current Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="current_password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('current_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🚗</div>
-                    <div class="stat-info">
-                        <h3 id="totalClients">0</h3>
-                        <p>Clients</p>
+                <div class="form-group">
+                    <label for="new_password">New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="new_password" required minlength="6">
+                        <span class="toggle-password" onclick="togglePasswordVisibility('new_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">👨‍💼</div>
-                    <div class="stat-info">
-                        <h3 id="totalStaff">0</h3>
-                        <p>Staff</p>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm_password" required minlength="6">
+                        <span class="toggle-password" onclick="togglePasswordVisibility('confirm_password', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </span>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">💰</div>
-                    <div class="stat-info">
-                        <h3 id="totalCashiers">0</h3>
-                        <p>Cashiers</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tabs -->
-            <div class="admin-tabs">
-                <button class="tab-btn active" onclick="showTab('create-staff')">Create Staff</button>
-                <button class="tab-btn" onclick="showTab('create-cashier')">Create Cashier</button>
-                <button class="tab-btn" onclick="showTab('create-client')">Create Client</button>
-                <button class="tab-btn" onclick="showTab('view-users')">View All Users</button>
-                <button class="tab-btn" onclick="showTab('pending-approvals')">Pending Approvals</button>
-            </div>
-
-            <!-- Tab Contents -->
-            <div id="create-staff" class="tab-content active">
-                <div class="form-container">
-                    <h2>Create Staff Account</h2>
-                    <div id="staffSuccess" class="success-msg">Staff Account Created Successfully!</div>
-                    <form id="staffForm" onsubmit="handleStaffSignup(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="staff_firstname">First Name</label>
-                                <input type="text" id="staff_firstname" placeholder="John" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="staff_lastname">Last Name</label>
-                                <input type="text" id="staff_lastname" placeholder="Doe" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="staff_email" placeholder="john@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="staff_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_address">Address</label>
-                            <input type="text" id="staff_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_username">Username</label>
-                            <input type="text" id="staff_username" placeholder="johndoe99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="staff_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="staff_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('staff_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Create Staff Account</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="create-cashier" class="tab-content">
-                <div class="form-container">
-                    <h2>Create Cashier Account</h2>
-                    <div id="cashierSuccess" class="success-msg">Cashier Account Created Successfully!</div>
-                    <form id="cashierForm" onsubmit="handleCashierSignup(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="cashier_firstname">First Name</label>
-                                <input type="text" id="cashier_firstname" placeholder="Jane" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="cashier_lastname">Last Name</label>
-                                <input type="text" id="cashier_lastname" placeholder="Smith" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="cashier_email" placeholder="jane@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="cashier_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_address">Address</label>
-                            <input type="text" id="cashier_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_username">Username</label>
-                            <input type="text" id="cashier_username" placeholder="janesmith99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cashier_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="cashier_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('cashier_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Create Cashier Account</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="create-client" class="tab-content">
-                <div class="form-container">
-                    <h2>Create Client Account</h2>
-                    <div id="clientSuccess" class="success-msg">Client Account Created Successfully!</div>
-                    <form id="clientForm" onsubmit="handleClientSignup(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="client_firstname">First Name</label>
-                                <input type="text" id="client_firstname" placeholder="John" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="client_lastname">Last Name</label>
-                                <input type="text" id="client_lastname" placeholder="Doe" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_email">Email Address <span class="optional-text">(Optional)</span></label>
-                            <input type="email" id="client_email" placeholder="johndoe@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="client_phone">Phone Number <span class="optional-text">(Optional)</span></label>
-                            <input type="tel" id="client_phone" placeholder="0912 345 6789">
-                        </div>
-                        <div class="form-group">
-                            <label for="client_address">Address</label>
-                            <input type="text" id="client_address" placeholder="123 Main St, City" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Sex</label>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="client_sex" value="Male" required> Male
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="client_sex" value="Female" required> Female
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_vehicle_type">Type of Vehicle/Motor</label>
-                            <input type="text" id="client_vehicle_type" placeholder="e.g., Honda Civic, Yamaha NMAX" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_problem">Problem of Vehicle/Motor</label>
-                            <textarea id="client_problem" rows="3" placeholder="Describe the issue..." required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_username">Username</label>
-                            <input type="text" id="client_username" placeholder="johndoe99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="client_password">Password</label>
-                            <div class="password-wrapper">
-                                <input type="password" id="client_password" placeholder="••••••••" required>
-                                <span class="toggle-password" onclick="togglePasswordVisibility('client_password', this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Create Client Account</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="view-users" class="tab-content">
-                <div class="users-list-container">
-                    <h2>All Registered Users</h2>
-                    <div id="usersList" class="users-table"></div>
-                </div>
-            </div>
-
-            <div id="pending-approvals" class="tab-content">
-                <div class="users-list-container">
-                    <h2>Pending Vehicle Problem Approvals</h2>
-                    <div id="pendingList" class="users-table"></div>
-                </div>
-            </div>
+                <button type="submit" class="btn btn-primary">Update Password</button>
+            </form>
         </div>
-    </section>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
