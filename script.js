@@ -89,6 +89,7 @@ function showPage(pageId) {
         if (pageId === 'user-dashboard') loadUserDashboard();
         else if (pageId === 'admin-dashboard') loadAdminDashboard();
         else if (pageId === 'staff-dashboard') loadStaffDashboard();
+        else if (pageId === 'cashier-dashboard') loadCashierDashboard();
 
         if (pageId !== 'main-page') clearNavHighlights();
     }, 100);
@@ -97,13 +98,10 @@ function showPage(pageId) {
 function navigateToSection(sectionId) {
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.remove('active'));
-
     setTimeout(() => {
         document.getElementById('main-page').classList.add('active');
         const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
-        }
+        if (targetSection) setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
         clearNavHighlights();
         const activeLink = document.querySelector(`.nav-link[data-target="${sectionId}"]`);
         if (activeLink) activeLink.classList.add('active');
@@ -141,12 +139,20 @@ function backToRoleSelection() {
     showPage('role-selection');
 }
 
-function showTab(tabId) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+// UPDATED: Scoped to admin-container to prevent conflicts with cashier tabs
+function showTab(tabId, event) {
+    document.querySelectorAll('.admin-container .tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.admin-container .tab-content').forEach(content => content.classList.remove('active'));
     if (event && event.target) event.target.classList.add('active');
     const tab = document.getElementById(tabId);
     if (tab) tab.classList.add('active');
+}
+
+function showCashierTab(tabId, event) {
+    document.querySelectorAll('#cashier-dashboard .tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('#cashier-dashboard .tab-content').forEach(content => content.classList.remove('active'));
+    if (event && event.target) event.target.classList.add('active');
+    document.getElementById(`cashier-${tabId}`).classList.add('active');
 }
 
 function togglePasswordVisibility(inputId, iconElement) {
@@ -185,7 +191,7 @@ function handleSignup(event) {
     const username = generateUsername(firstName, lastName);
     const tempPassword = generateTempPassword();
 
-    const user = { id: userId, name: fullName, email: email || 'Not provided', phone: phone || 'Not provided', address, sex, vehicleType, problem, role: 'client', username, password: tempPassword, passwordChanged: false, status: 'Pending Approval' };
+    const user = { id: userId, name: fullName, email: email || 'Not provided', phone: phone || 'Not provided', address, sex, vehicleType, problem, role: 'client', username, password: tempPassword, passwordChanged: false, status: 'Pending Approval', paymentStatus: 'Unpaid', billAmount: 0 };
 
     let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
     if (email && email !== 'Not provided' && users.some(u => u.email === email)) { alert("This email is already registered!"); return; }
@@ -210,12 +216,16 @@ function handleStaffSignup(event) {
     const lastName = document.getElementById('staff_lastname').value.trim();
     const email = document.getElementById('staff_email').value.trim();
     const phone = document.getElementById('staff_phone').value.trim();
+    const sexElement = document.querySelector('input[name="staff_sex"]:checked');
+    const sex = sexElement ? sexElement.value : 'Not specified';
+    const age = document.getElementById('staff_age')?.value.trim() || 'Not provided';
+
     if (!email && !phone) { alert("Please provide either an email address or phone number."); return; }
 
     const userId = generateId('staff');
     const username = generateUsername(firstName, lastName);
     const tempPassword = generateTempPassword();
-    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', address: document.getElementById('staff_address').value.trim(), role: 'staff', username, password: tempPassword, passwordChanged: false, status: 'Active', availability: 'Available' };
+    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', age, sex, address: document.getElementById('staff_address').value.trim(), role: 'staff', username, password: tempPassword, passwordChanged: false, status: 'Active', availability: 'Available' };
     
     let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
     users.push(user);
@@ -234,12 +244,16 @@ function handleCashierSignup(event) {
     const lastName = document.getElementById('cashier_lastname').value.trim();
     const email = document.getElementById('cashier_email').value.trim();
     const phone = document.getElementById('cashier_phone').value.trim();
+    const sexElement = document.querySelector('input[name="cashier_sex"]:checked');
+    const sex = sexElement ? sexElement.value : 'Not specified';
+    const age = document.getElementById('cashier_age')?.value.trim() || 'Not provided';
+
     if (!email && !phone) { alert("Please provide either an email address or phone number."); return; }
 
     const userId = generateId('cashier');
     const username = generateUsername(firstName, lastName);
     const tempPassword = generateTempPassword();
-    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', address: document.getElementById('cashier_address').value.trim(), role: 'cashier', username, password: tempPassword, passwordChanged: false, status: 'Active' };
+    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', age, sex, address: document.getElementById('cashier_address').value.trim(), role: 'cashier', username, password: tempPassword, passwordChanged: false, status: 'Active' };
     
     let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
     users.push(user);
@@ -265,7 +279,7 @@ function handleClientSignup(event) {
     const userId = generateId('client');
     const username = generateUsername(firstName, lastName);
     const tempPassword = generateTempPassword();
-    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', address: document.getElementById('client_address').value.trim(), sex, vehicleType: document.getElementById('client_vehicle_type').value.trim(), problem: document.getElementById('client_problem').value.trim(), role: 'client', username, password: tempPassword, passwordChanged: false, status: 'Pending Approval' };
+    const user = { id: userId, name: `${firstName} ${lastName}`, email: email || 'Not provided', phone: phone || 'Not provided', address: document.getElementById('client_address').value.trim(), sex, vehicleType: document.getElementById('client_vehicle_type').value.trim(), problem: document.getElementById('client_problem').value.trim(), role: 'client', username, password: tempPassword, passwordChanged: false, status: 'Pending Approval', paymentStatus: 'Unpaid', billAmount: 0 };
     
     let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
     users.push(user);
@@ -322,7 +336,7 @@ function handleLogin(event) {
         if (role === 'client') { loadUserDashboard(); showPage('user-dashboard'); } 
         else if (role === 'staff') { loadStaffDashboard(); showPage('staff-dashboard'); } 
         else if (role === 'admin') { loadAdminDashboard(); showPage('admin-dashboard'); } 
-        else if (role === 'cashier') { showPage('cashier-dashboard'); }
+        else if (role === 'cashier') { loadCashierDashboard(); showPage('cashier-dashboard'); }
     } else {
         errorMsg.innerText = "Invalid username or password.";
         errorMsg.style.display = 'block';
@@ -365,7 +379,7 @@ function handleChangePassword(event) {
         const user = users[userIndex];
         if (user.role === 'client') { loadUserDashboard(); showPage('user-dashboard'); } 
         else if (user.role === 'staff') { loadStaffDashboard(); showPage('staff-dashboard'); } 
-        else if (user.role === 'cashier') { showPage('cashier-dashboard'); }
+        else if (user.role === 'cashier') { loadCashierDashboard(); showPage('cashier-dashboard'); }
     }
 }
 
@@ -417,7 +431,7 @@ function loadUserDashboard() {
             let statusClass = 'status-pending';
             if (user.status === 'Approved') statusClass = 'status-approved';
             else if (user.status === 'Ongoing Repair') statusClass = 'status-ongoing';
-            else if (user.status === 'Fixed') statusClass = 'status-fixed';
+            else if (user.status === 'Fixed' || user.status === 'Completed') statusClass = 'status-fixed';
             else if (user.status === 'Rejected') statusClass = 'status-rejected';
             statusBadge.className = `status-badge ${statusClass}`;
         }
@@ -489,10 +503,186 @@ function markAsFixed(clientUsername) {
         users[staffIndex].availability = 'Available';
         localStorage.setItem('autotech_users', JSON.stringify(users));
         loadStaffDashboard();
-        alert("Vehicle marked as Fixed! You are now 'Available'.");
+        alert("Vehicle marked as Fixed! Ready for cashier billing.");
     }
 }
 
+// ==========================================
+// 7. CASHIER DASHBOARD LOGIC
+// ==========================================
+function loadCashierDashboard() {
+    const currentUsername = localStorage.getItem('autotech_current_user');
+    const users = JSON.parse(localStorage.getItem('autotech_users')) || [];
+    const transactions = JSON.parse(localStorage.getItem('autotech_transactions')) || [];
+    const cashier = users.find(u => u.username === currentUsername);
+
+    if (cashier && cashier.role === 'cashier') {
+        document.getElementById('cashierWelcome').innerHTML = `Welcome, ${cashier.name}! <span class="id-badge">${cashier.id}</span>`;
+
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+        
+        const monthlyTransactions = transactions.filter(t => {
+            const d = new Date(t.date);
+            return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+        });
+
+        const monthlyIncome = monthlyTransactions.reduce((sum, t) => sum + parseFloat(t.amount), 0);
+        const pendingPayments = users.filter(u => u.role === 'client' && u.paymentStatus === 'Unpaid' && (u.status === 'Fixed' || u.status === 'Completed')).length;
+        const completedPayments = transactions.length;
+
+        document.getElementById('cashierMonthlyIncome').innerText = `₱${monthlyIncome.toLocaleString()}`;
+        document.getElementById('cashierTotalTransactions').innerText = completedPayments;
+        document.getElementById('cashierPendingPayments').innerText = pendingPayments;
+        document.getElementById('cashierCompletedPayments').innerText = completedPayments;
+
+        const billingList = document.getElementById('billingList');
+        const pendingClients = users.filter(u => u.role === 'client' && (u.status === 'Fixed' || u.status === 'Completed') && u.paymentStatus !== 'Paid');
+        
+        if (pendingClients.length === 0) {
+            billingList.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No pending bills. All clients are paid up!</p>';
+        } else {
+            let html = '';
+            pendingClients.forEach(client => {
+                html += `
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <h3>${client.name} <span class="id-badge">${client.id}</span></h3>
+                            <span class="status-badge status-pending">Unpaid</span>
+                        </div>
+                        <div class="user-details">
+                            <p><strong>Vehicle:</strong> ${client.vehicleType}</p>
+                            <p><strong>Service/Problem:</strong> ${client.problem}</p>
+                            <p><strong>Contact:</strong> ${client.phone !== 'Not provided' ? client.phone : client.email}</p>
+                        </div>
+                        <div class="approval-actions" style="margin-top: 1rem; align-items: center; flex-wrap: wrap;">
+                            <input type="number" id="billAmount_${client.username}" placeholder="Enter Amount (₱)" value="${client.billAmount || ''}">
+                            <button class="btn-approve" onclick="processPayment('${client.username}')">Process Payment</button>
+                        </div>
+                    </div>
+                `;
+            });
+            billingList.innerHTML = html;
+        }
+
+        const historyList = document.getElementById('historyList');
+        if (transactions.length === 0) {
+            historyList.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No transaction history yet.</p>';
+        } else {
+            const sortedTransactions = [...transactions].reverse();
+            let html = '';
+            sortedTransactions.forEach(t => {
+                html += `
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <h3>Receipt #${t.receiptId}</h3>
+                            <span class="status-badge status-approved">Paid</span>
+                        </div>
+                        <div class="user-details">
+                            <p><strong>Client:</strong> ${t.clientName} (${t.clientId})</p>
+                            <p><strong>Service:</strong> ${t.service}</p>
+                            <p><strong>Amount:</strong> ₱${parseFloat(t.amount).toLocaleString()}</p>
+                            <p><strong>Date & Time:</strong> ${t.date} at ${t.time}</p>
+                            <p><strong>Cashier:</strong> ${t.cashierName}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            historyList.innerHTML = html;
+        }
+
+        renderIncomeGraph(transactions);
+    }
+}
+
+function processPayment(clientUsername) {
+    const amountInput = document.getElementById(`billAmount_${clientUsername}`);
+    const amount = parseFloat(amountInput.value);
+
+    if (!amount || amount <= 0) {
+        alert("Please enter a valid bill amount.");
+        return;
+    }
+
+    const currentUsername = localStorage.getItem('autotech_current_user');
+    let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
+    let transactions = JSON.parse(localStorage.getItem('autotech_transactions')) || [];
+    
+    const clientIndex = users.findIndex(u => u.username === clientUsername);
+    const cashier = users.find(u => u.username === currentUsername);
+
+    if (clientIndex !== -1 && cashier) {
+        const client = users[clientIndex];
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US');
+        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const receiptId = `RCP-${String(transactions.length + 1).padStart(4, '0')}`;
+
+        client.paymentStatus = 'Paid';
+        client.billAmount = amount;
+        client.status = 'Completed';
+
+        const transaction = {
+            receiptId,
+            clientName: client.name,
+            clientId: client.id,
+            service: client.problem,
+            amount: amount,
+            date: dateStr,
+            time: timeStr,
+            cashierName: cashier.name,
+            cashierId: cashier.id
+        };
+
+        transactions.push(transaction);
+
+        localStorage.setItem('autotech_users', JSON.stringify(users));
+        localStorage.setItem('autotech_transactions', JSON.stringify(transactions));
+
+        alert(`Payment of ₱${amount.toLocaleString()} processed successfully!\nReceipt ID: ${receiptId}`);
+        loadCashierDashboard();
+    }
+}
+
+function renderIncomeGraph(transactions) {
+    const graphContainer = document.getElementById('incomeGraph');
+    const serviceIncome = {};
+    
+    transactions.forEach(t => {
+        const service = t.service.split(' ')[0] || 'General Service'; 
+        if (!serviceIncome[service]) serviceIncome[service] = 0;
+        serviceIncome[service] += parseFloat(t.amount);
+    });
+
+    const maxIncome = Math.max(...Object.values(serviceIncome), 1);
+
+    if (Object.keys(serviceIncome).length === 0) {
+        graphContainer.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No income data available yet.</p>';
+        return;
+    }
+
+    let html = '<div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">';
+    for (const [service, income] of Object.entries(serviceIncome)) {
+        const percentage = (income / maxIncome) * 100;
+        html += `
+            <div>
+                <div class="bar-label">
+                    <span>${service} Repair/Service</span>
+                    <span>₱${income.toLocaleString()}</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: ${percentage}%;"></div>
+                </div>
+            </div>
+        `;
+    }
+    html += '</div>';
+    graphContainer.innerHTML = html;
+}
+
+// ==========================================
+// 8. ADMIN DASHBOARD LOGIC (UPDATED FOR SEPARATED LISTS)
+// ==========================================
 function loadAdminDashboard() {
     const currentUsername = localStorage.getItem('autotech_current_user');
     const users = JSON.parse(localStorage.getItem('autotech_users')) || [];
@@ -504,26 +694,84 @@ function loadAdminDashboard() {
         const elClients = document.getElementById('totalClients'); if (elClients) elClients.innerText = users.filter(u => u.role === 'client').length;
         const elStaff = document.getElementById('totalStaff'); if (elStaff) elStaff.innerText = users.filter(u => u.role === 'staff').length;
         const elCashiers = document.getElementById('totalCashiers'); if (elCashiers) elCashiers.innerText = users.filter(u => u.role === 'cashier').length;
-        loadUsersList();
+        
+        // Load the separated lists
+        loadClientsList();
+        loadStaffList();
+        loadCashiersList();
         loadPendingApprovals();
     }
 }
 
-function loadUsersList() {
+// NEW: Generic function to render users by specific role
+function renderUserListByRole(role, containerId) {
     const users = JSON.parse(localStorage.getItem('autotech_users')) || [];
     const currentUsername = localStorage.getItem('autotech_current_user');
-    const usersList = document.getElementById('usersList');
-    if (!usersList) return;
-    if (users.length === 0) { usersList.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No users registered yet.</p>'; return; }
+    const container = document.getElementById(containerId);
+    
+    if (!container) return;
+
+    const filteredUsers = users.filter(u => u.role === role);
+
+    if (filteredUsers.length === 0) {
+        container.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No ${role}s registered yet.</p>`;
+        return;
+    }
+
     let html = '';
-    users.forEach(user => {
+    filteredUsers.forEach(user => {
         const roleClass = `role-${user.role}`;
         const isSelf = user.username === currentUsername;
         const passwordDisplay = user.passwordChanged ? '<em style="color: var(--text-secondary);">Encrypted</em>' : `<code style="color: var(--accent);">${user.password}</code>`;
         const deleteButton = isSelf ? '<span style="color: var(--text-secondary); font-size: 0.85rem; font-style: italic;">(Current User)</span>' : `<button class="btn-delete" onclick="deleteUser('${user.username}')">Delete Account</button>`;
-        html += `<div class="user-card"><div class="user-card-header"><h3>${user.name} <span class="id-badge">${user.id || 'N/A'}</span></h3><span class="role-badge ${roleClass}">${user.role}</span></div><div class="user-details"><p><strong>Username:</strong> ${user.username}</p><p><strong>Password:</strong> ${passwordDisplay}</p><p><strong>Email:</strong> ${user.email || 'Not provided'}</p><p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p><p><strong>Address:</strong> ${user.address}</p>${user.role === 'client' ? `<p><strong>Vehicle:</strong> ${user.vehicleType}</p><p><strong>Status:</strong> ${user.status}</p>` : ''}</div><div class="approval-actions" style="margin-top: 1rem; justify-content: flex-end;">${deleteButton}</div></div>`;
+        
+        let extraDetails = '';
+        if (role === 'client') {
+            extraDetails = `
+                <p><strong>Vehicle:</strong> ${user.vehicleType}</p>
+                <p><strong>Status:</strong> ${user.status}</p>
+                <p><strong>Payment:</strong> ${user.paymentStatus || 'N/A'}</p>
+            `;
+        } else {
+            extraDetails = `
+                <p><strong>Age:</strong> ${user.age || 'N/A'}</p>
+                <p><strong>Gender:</strong> ${user.sex || 'N/A'}</p>
+            `;
+        }
+
+        html += `
+            <div class="user-card">
+                <div class="user-card-header">
+                    <h3>${user.name} <span class="id-badge">${user.id || 'N/A'}</span></h3>
+                    <span class="role-badge ${roleClass}">${user.role}</span>
+                </div>
+                <div class="user-details">
+                    <p><strong>Username:</strong> ${user.username}</p>
+                    <p><strong>Password:</strong> ${passwordDisplay}</p>
+                    <p><strong>Email:</strong> ${user.email || 'Not provided'}</p>
+                    <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                    <p><strong>Address:</strong> ${user.address}</p>
+                    ${extraDetails}
+                </div>
+                <div class="approval-actions" style="margin-top: 1rem; justify-content: flex-end;">
+                    ${deleteButton}
+                </div>
+            </div>
+        `;
     });
-    usersList.innerHTML = html;
+    container.innerHTML = html;
+}
+
+function loadClientsList() {
+    renderUserListByRole('client', 'clientsList');
+}
+
+function loadStaffList() {
+    renderUserListByRole('staff', 'staffList');
+}
+
+function loadCashiersList() {
+    renderUserListByRole('cashier', 'cashiersList');
 }
 
 function loadPendingApprovals() {
@@ -548,13 +796,13 @@ function deleteUser(username) {
         let users = JSON.parse(localStorage.getItem('autotech_users')) || [];
         users = users.filter(u => u.username !== username);
         localStorage.setItem('autotech_users', JSON.stringify(users));
-        loadUsersList(); loadAdminDashboard();
+        loadAdminDashboard(); // Refreshes all lists
         alert('Account deleted.');
     }
 }
 
 // ==========================================
-// 7. INITIALIZATION
+// 9. INITIALIZATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
